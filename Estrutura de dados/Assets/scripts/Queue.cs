@@ -1,5 +1,8 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
-public class Queue {
+public class Queue : MonoBehaviour{
 	private Node begin;
 	private Node end;
 	private int nElements;
@@ -23,14 +26,14 @@ public class Queue {
 		if (empty())
 			return -1;
 
-		return begin.getContent();
+		return begin.content;
 	}
 
 	public void push (int value) {
 		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		Node newNode = new Node();
 		newNode.setSquare(cube);
-		newNode.setContent(value);
+		newNode.content = value;
 
 	   if (empty()){   
 			begin = newNode;
@@ -38,7 +41,7 @@ public class Queue {
 	   }
 	   else {
 			end.setNext(newNode);
-			int pos = tamanho();
+			int pos = size();
 			newNode.getSquare().transform.position = new Vector3(-6.3f +(float) pos, 0, 0); 
 		}
 		
@@ -65,7 +68,7 @@ public class Queue {
 			int number = 0;
 
 			while(number < (size()-1)){
-				Vector3 position = this.transform.position;
+				Vector3 position = aux.getSquare().transform.position;
 				position.x--;
 				aux.getSquare().transform.position = position;
 				aux = aux.getNext();
