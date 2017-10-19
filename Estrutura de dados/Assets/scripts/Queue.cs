@@ -41,6 +41,7 @@ public class Queue {
 			int pos = tamanho();
 			newNode.getSquare().transform.position = new Vector3(-6.3f +(float) pos, 0, 0); 
 		}
+		
 		end = newNode;
 		nElements++;
 	}
@@ -50,8 +51,7 @@ public class Queue {
 			//printar q n tem nada na fila	        
 			return; 
 	    }
-
-		//int value = first();
+		
 		Node p = begin;
 		if (begin == end){
 			Destroy(begin.getSquare());
@@ -71,14 +71,9 @@ public class Queue {
 				aux = aux.getNext();
 				number++;
 			}
-
 	 	}	
 
 	    p= null;
-
 	    nElements--;
-	}
-
-	
-	
+	}	
 }
