@@ -64,7 +64,7 @@ public class Queue {
 			Node aux = begin;
 			int number = 0;
 
-			while(number < 5){
+			while(number < (size()-1)){
 				Vector3 position = this.transform.position;
 				position.x--;
 				aux.getSquare().transform.position = position;
