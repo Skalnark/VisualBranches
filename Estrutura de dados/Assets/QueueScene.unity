@@ -147,6 +147,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1094054494820672, guid: 845622bfce536d24ca59e2caaf49e714, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 845622bfce536d24ca59e2caaf49e714, type: 2}
   m_IsPrefabParent: 0
@@ -670,6 +674,10 @@ Prefab:
       propertyPath: m_Name
       value: cube (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1355279615588238, guid: 993f535f4043446ea80d79f4c5bc2942, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 993f535f4043446ea80d79f4c5bc2942, type: 2}
   m_IsPrefabParent: 0
@@ -1055,7 +1063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.42880356, g: 0.35294116, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 1, b: 1, a: 0.334}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1201,6 +1209,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 006bc9cfc08604df38e1747ed73b7022, type: 2}
+    - target: {fileID: 1355279615588238, guid: 993f535f4043446ea80d79f4c5bc2942, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 993f535f4043446ea80d79f4c5bc2942, type: 2}
   m_IsPrefabParent: 0
