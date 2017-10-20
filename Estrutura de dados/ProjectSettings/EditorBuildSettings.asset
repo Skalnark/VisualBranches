@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/QueueScene.unity
     guid: 0c81aa26790e34d0bb947a4d673de357
+  - enabled: 1
+    path: Assets/numericPanel.unity
+    guid: 731688d690956e6489f74291fb9765ae

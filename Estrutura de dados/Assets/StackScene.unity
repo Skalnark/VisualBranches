@@ -324,8 +324,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490871113}
-        m_MethodName: OnClick
+      - m_Target: {fileID: 1490871114}
+        m_MethodName: GoToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -455,6 +455,7 @@ GameObject:
   - component: {fileID: 1490871111}
   - component: {fileID: 1490871110}
   - component: {fileID: 1490871113}
+  - component: {fileID: 1490871114}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -516,6 +517,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d8895ecc3fe7324182bd00aed691e7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1490871114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1490871109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa68969e67bdd047997edb17bf1ecc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1585348487

@@ -339,8 +339,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1483234913}
-        m_MethodName: OnClick
+      - m_Target: {fileID: 1483234917}
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -508,7 +508,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1483234917}
-        m_MethodName: OnClick
+        m_MethodName: GoToList
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -805,10 +805,6 @@ GameObject:
   - component: {fileID: 1483234911}
   - component: {fileID: 1483234910}
   - component: {fileID: 1483234917}
-  - component: {fileID: 1483234916}
-  - component: {fileID: 1483234915}
-  - component: {fileID: 1483234914}
-  - component: {fileID: 1483234913}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -861,50 +857,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1483234913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1483234909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6762440362fe6488aa6e961763452007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1483234914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1483234909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0acd5b8882543de49969332a18646936, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1483234915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1483234909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1756356396252a64ba5435d896758cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1483234916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1483234909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d8895ecc3fe7324182bd00aed691e7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1483234917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -992,8 +944,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1483234914}
-        m_MethodName: OnClick
+      - m_Target: {fileID: 1483234917}
+        m_MethodName: GoToStack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1188,8 +1140,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1483234915}
-        m_MethodName: OnClick
+      - m_Target: {fileID: 1483234917}
+        m_MethodName: GoToQueue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
