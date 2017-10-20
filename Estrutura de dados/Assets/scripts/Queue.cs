@@ -1,13 +1,16 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Queue : MonoBehaviour{
 	private Node begin;
 	private Node end;
-	private int nElements;
-	
-	public Queue() {
+	public int nElements;
+    public GameObject objeto;
+
+    public Queue() {
 		nElements = 0;
 	}
 
@@ -30,53 +33,63 @@ public class Queue : MonoBehaviour{
 	}
 
 	public void push (int value) {
-		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject cube = Instantiate(objeto);
 		Node newNode = new Node();
 		newNode.setSquare(cube);
-		newNode.content = value;
+		newNode.content =  value;
+        cube.GetComponentInChildren<TextMesh>().text = ""+ newNode.content;
 
 	   if (empty()){   
 			begin = newNode;
-			newNode.getSquare().transform.position = new Vector3(-6.3f, 0,0);
-	   }
-	   else {
+            end = newNode;
+            newNode.getSquare().transform.position = new Vector3(-6.3f, 0,0);
+	   }else
+        {
 			end.setNext(newNode);
+            end = newNode;
 			int pos = size();
-			newNode.getSquare().transform.position = new Vector3(-6.3f +(float) pos, 0, 0); 
+			newNode.getSquare().transform.position = new Vector3(-6.3f + pos, 0, 0); 
 		}
-		
-		end = newNode;
+
+        Debug.Log("end é igual a:" + end.content);
+	
 		nElements++;
 	}
 
 	public void pull() {
+
+        GameObject objeto = begin.getSquare();
 		if (empty()) {
 			//printar q n tem nada na fila	        
 			return; 
 	    }
 		
 		Node p = begin;
-		if (begin == end){
-			Destroy(begin.getSquare());
+		if (begin == end)
+        {
 			end = null;
 			begin = null;
-	 	}
-	 	else{
-			Destroy(begin.getSquare());	
-			begin = p.getNext();
-			Node aux = begin;
-			int number = 0;
+            Destroy(objeto);
+        }
+	 	else
+        {
+            begin = p.getNext();
+            Destroy(p.getSquare());
 
-			while(number < (size()-1)){
+            Node aux = begin;
+			int number = 0;
+            while (number < (nElements - 1)){
 				Vector3 position = aux.getSquare().transform.position;
 				position.x--;
 				aux.getSquare().transform.position = position;
 				aux = aux.getNext();
 				number++;
 			}
-	 	}	
+	 	}
+        Debug.Log("begin é igual a:" + begin.content);
 
-	    p= null;
+
+        p = null;
 	    nElements--;
 	}	
 }

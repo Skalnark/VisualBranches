@@ -78,12 +78,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\scripts\BlockCreator.cs" />
+    <Compile Include="Assets\input.cs" />
     <Compile Include="Assets\scripts\LDE.cs" />
     <Compile Include="Assets\scripts\MainMenuNavigator.cs" />
+    <Compile Include="Assets\scripts\MakeAPush.cs" />
+    <Compile Include="Assets\scripts\MoveCamera.cs" />
     <Compile Include="Assets\scripts\Node.cs" />
     <Compile Include="Assets\scripts\Queue.cs" />
     <Compile Include="Assets\scripts\QueuePainel.cs" />
+    <Compile Include="Assets\scripts\SetTextValue.cs" />
+    <Compile Include="Assets\scripts\Stack.cs" />
+    <Compile Include="Assets\scripts\showInputField.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
