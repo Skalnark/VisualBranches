@@ -5,7 +5,9 @@ using UnityEngine;
 public class MoveCamera : MonoBehaviour {
 
     public GameObject eventSystem;
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     GameObject camera;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
     float horizontal;
 
 	void Start () {

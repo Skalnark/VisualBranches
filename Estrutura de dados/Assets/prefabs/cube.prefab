@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65290434626522066}
   - component: {fileID: 23470914453951040}
   - component: {fileID: 114290546533727458}
-  - component: {fileID: 114922409900052476}
+  - component: {fileID: 114869069373354032}
   m_Layer: 0
   m_Name: cube
   m_TagString: Untagged
@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1355279615588238}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4505770668158862}
@@ -165,9 +165,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1831307849567872}
-  m_Text: '1
-
-'
+  m_Text: 1
   m_OffsetZ: 0
   m_CharacterSize: 0.06
   m_LineSpacing: 1
@@ -193,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cube: {fileID: 0}
---- !u!114 &114922409900052476
+--- !u!114 &114869069373354032
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -204,6 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4496c9e41808743a1a1e6439a6d2c7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  content: 0
+  content: 1
   square: {fileID: 1355279615588238}
   next: {fileID: 0}

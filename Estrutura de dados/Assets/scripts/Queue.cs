@@ -5,15 +5,16 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Queue : MonoBehaviour{
+    public GameObject objetoBegin;
 	private Node begin;
-	private Node end;
+    private Node end;
 	public int nElements;
-    public GameObject objeto;
-    public float speed;
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     public GameObject camera;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
     public Queue() {
-		nElements = 0;
+        nElements = 0;
 	}
 
 	public bool empty () {
@@ -35,10 +36,8 @@ public class Queue : MonoBehaviour{
 	}
 
 	public void push (int value) {
-        float step = speed * Time.deltaTime;
-        GameObject cube = Instantiate(objeto);
-        objeto.transform.position = new Vector3(0, 0, 0);
-		Node newNode = new Node();
+        GameObject cube = Instantiate(objetoBegin);
+        Node newNode = new Node();
 		newNode.setSquare(cube);
 		newNode.content =  value;
         cube.GetComponentInChildren<TextMesh>().text = ""+ newNode.content;
@@ -50,7 +49,7 @@ public class Queue : MonoBehaviour{
 	   }else
         {
             newNode.getSquare().transform.position = new Vector3(-6, 1, 0);
-			end.setNext(newNode);
+            end.setNext(newNode);
             end = newNode;
 			int pos = size();
             float target = -6 + pos;
@@ -62,47 +61,47 @@ public class Queue : MonoBehaviour{
             }
 		}
 
-        Debug.Log("end é igual a:" + end.content);
-	
 		nElements++;
 	}
 
 	public void pull() {
 
-        GameObject objeto = begin.getSquare();
+            GameObject objeto = begin.getSquare();
+
 		if (empty()) {
-			//printar q n tem nada na fila	        
-			return; 
+            Debug.Log("Você não pode remover nada da fila, pois ela está vazia.");
+            return; 
 	    }
 		
 		Node p = begin;
-		if (begin == end)
+
+        if (nElements == 1)
         {
-			end = null;
-			begin = null;
-            Destroy(objeto);
+            end = null;
+            begin = null;
         }
-	 	else
+        else
         {
-            begin = p.getNext();
-            Destroy(p.getSquare());
+            begin = begin.getNext();
 
             Node aux = begin;
-			int number = 0;
-            while (number < (nElements - 1)){
-				Vector3 position = aux.getSquare().transform.position;
-				position.x--;
-				aux.getSquare().transform.position = position;
-				aux = aux.getNext();
-				number++;
-			}
-	 	}
-        Debug.Log("begin é igual a:" + begin.content);
+            int number = 0;
 
+            while (number < (nElements - 1))
+            {
+                Vector3 position = aux.getSquare().transform.position;
+                position.x--;
+                aux.getSquare().transform.position = position;
+                aux = aux.getNext();
+                number++;
+            }
+        }
+
+        Destroy(p.getSquare());
 
         p = null;
-	    nElements--;
-	}	
+        nElements--;
+    }	
 
     //função que não tem nada a ver com a fila
     public IEnumerator MoveObject(Transform block, float target)

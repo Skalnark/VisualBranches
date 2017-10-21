@@ -155,7 +155,8 @@ Prefab:
         type: 2}
       propertyPath: m_FirstSelected
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1216112944231518, guid: 56774c4db0be3bb41b1ad45c9720d9f2,
+        type: 2}
     - target: {fileID: 114774454196563004, guid: 56774c4db0be3bb41b1ad45c9720d9f2,
         type: 2}
       propertyPath: m_sendNavigationEvents
@@ -177,6 +178,18 @@ Prefab:
       propertyPath: camera
       value: 
       objectReference: {fileID: 1680176575}
+    - target: {fileID: 114171465167671270, guid: 56774c4db0be3bb41b1ad45c9720d9f2,
+        type: 2}
+      propertyPath: objetoBegin
+      value: 
+      objectReference: {fileID: 1355279615588238, guid: 993f535f4043446ea80d79f4c5bc2942,
+        type: 2}
+    - target: {fileID: 114171465167671270, guid: 56774c4db0be3bb41b1ad45c9720d9f2,
+        type: 2}
+      propertyPath: objetoEnd
+      value: 
+      objectReference: {fileID: 1355279615588238, guid: 993f535f4043446ea80d79f4c5bc2942,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56774c4db0be3bb41b1ad45c9720d9f2, type: 2}
   m_IsPrefabParent: 0
@@ -428,7 +441,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 316097775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546b7597b12045b4ab347c6418d876c0, type: 3}
+  m_Script: {fileID: 11500000, guid: ffa68969e67bdd047997edb17bf1ecc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &316097781

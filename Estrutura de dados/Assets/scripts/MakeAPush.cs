@@ -12,7 +12,13 @@ public class MakeAPush : MonoBehaviour {
 	public void OnClick()
     {
         Debug.Log(input.text);
-        inputObject.GetComponent<Queue>().push(int.Parse(input.text));
+        try
+        {
+            inputObject.GetComponent<Queue>().push(int.Parse(input.text));
+        } catch(System.Exception e)
+        {
+            Debug.Log(e);
+        }
         input.text = null;
         textFieldObject.SetActive(false);
 
