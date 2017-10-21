@@ -9,9 +9,13 @@ public class Queue : MonoBehaviour{
 	private Node begin;
     private Node end;
 	public int nElements;
+<<<<<<< HEAD
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     public GameObject camera;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+=======
+    public GameObject objeto;
+>>>>>>> 5e861ce03920d25ca913cab3b4426580b87534bd
 
     public Queue() {
         nElements = 0;
@@ -36,8 +40,13 @@ public class Queue : MonoBehaviour{
 	}
 
 	public void push (int value) {
+<<<<<<< HEAD
         GameObject cube = Instantiate(objetoBegin);
         Node newNode = new Node();
+=======
+        GameObject cube = Instantiate(objeto);
+		Node newNode = new Node();
+>>>>>>> 5e861ce03920d25ca913cab3b4426580b87534bd
 		newNode.setSquare(cube);
 		newNode.content =  value;
         cube.GetComponentInChildren<TextMesh>().text = ""+ newNode.content;
@@ -45,25 +54,24 @@ public class Queue : MonoBehaviour{
 	   if (empty()){   
 			begin = newNode;
             end = newNode;
-            newNode.getSquare().transform.position = new Vector3(-6, 0,0);
+            newNode.getSquare().transform.position = new Vector3(-6.3f, 0,0);
 	   }else
         {
+<<<<<<< HEAD
             newNode.getSquare().transform.position = new Vector3(-6, 1, 0);
             end.setNext(newNode);
+=======
+			end.setNext(newNode);
+>>>>>>> 5e861ce03920d25ca913cab3b4426580b87534bd
             end = newNode;
 			int pos = size();
-            float target = -6 + pos;
-
-            StartCoroutine(MoveObject(newNode.getSquare().transform, target));
-            if (size() > 12)
-            {
-                StartCoroutine(MoveCameraWhenPush(camera.transform, camera.transform.position.x + 1));
-            }
+			newNode.getSquare().transform.position = new Vector3(-6.3f + pos, 0, 0); 
 		}
 
 		nElements++;
 	}
 
+<<<<<<< HEAD
 	public void pull() {
 
             GameObject objeto = begin.getSquare();
@@ -79,12 +87,29 @@ public class Queue : MonoBehaviour{
         {
             end = null;
             begin = null;
+=======
+	public void pull()
+    {
+        if (empty())
+        {
+            Debug.Log("Você não pode remover nada da fila, pois ela está vazia.");	        
+			return; 
+	    }
+		
+		Node p = begin;
+
+        if (nElements == 1)
+        {
+			end = null;
+			begin = null;
+>>>>>>> 5e861ce03920d25ca913cab3b4426580b87534bd
         }
         else
         {
             begin = begin.getNext();
 
             Node aux = begin;
+<<<<<<< HEAD
             int number = 0;
 
             while (number < (nElements - 1))
@@ -138,4 +163,21 @@ public class Queue : MonoBehaviour{
         }
     }
 
+=======
+			int number = 0;
+            while (number < (nElements - 1)){
+				Vector3 position = aux.getSquare().transform.position;
+				position.x--;
+				aux.getSquare().transform.position = position;
+				aux = aux.getNext();
+				number++;
+			}
+	 	}
+
+        Destroy(p.getSquare());
+
+        p = null;
+	    nElements--;
+    }
+>>>>>>> 5e861ce03920d25ca913cab3b4426580b87534bd
 }
