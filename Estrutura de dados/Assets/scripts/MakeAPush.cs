@@ -9,7 +9,7 @@ public class MakeAPush : MonoBehaviour {
     public GameObject textFieldObject;
     public InputField input;
 
-	public void OnClick()
+	public void PushQueue()
     {
         Debug.Log(input.text);
         try
@@ -33,5 +33,21 @@ public class MakeAPush : MonoBehaviour {
     {
         textFieldObject.SetActive(true);
         input.text = null;
+    }
+
+    public void PushStack()
+    {
+        Debug.Log(input.text);
+        try
+        {
+            inputObject.GetComponent<Stack>().Push(int.Parse(input.text));
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
+        }
+        input.text = null;
+        textFieldObject.SetActive(false);
+
     }
 }

@@ -32,14 +32,6 @@ public class Queue : MonoBehaviour
         return nElements;
     }
 
-    public int first()
-    {
-        if (empty())
-            return -1;
-
-        return begin.content;
-    }
-
     public void push(int value)
     {
         GameObject cube = Instantiate(objetoBegin);

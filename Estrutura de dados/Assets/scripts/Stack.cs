@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Stack : MonoBehaviour{
-    Node top;
-    int nElements;
+    private Node top;
+    public int nElements;
+    public GameObject objetoBegin;
 
     public Stack()
     {
@@ -26,56 +27,44 @@ public class Stack : MonoBehaviour{
         return nElements;
     }
 
-    public int getTop()
+    public void Push(int value)
     {
-        if (empty())
-        {
-            return -1; 
-        }
-
-        return top.content;
-    }
-
-    public bool push(int value)
-    {
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject stack = Instantiate(objetoBegin);
         Node newNode = new Node();
-        newNode.setSquare(cube);
+        newNode.setSquare(stack);
         newNode.content = value;
+        stack.GetComponentInChildren<TextMesh>().text = "" + newNode.content;
 
         if (empty())
         {
-            //top = newNode;
             //ESSES VALORES ESTÃO ASSIM POR CAUSA DA ROTAÇÃO DA CAMERA
             newNode.getSquare().transform.position = new Vector3(-0.5f, -4.9f, 0);
         }
         else
         {
             newNode.setNext(top);
-            newNode.getSquare().transform.position = new Vector3(-0.5f, -4.9f + (float) size(), 0);
+            newNode.getSquare().transform.position = new Vector3(-0.5f, -4.9f + ((float)size()/2), 0);
         }
         
         top = newNode;
 
         nElements++;
-        return true;
     }
 
     /** Retira o elemento do topo da pilha.
 	    Retorna -1 se a pilha estiver vazia.
 	    Caso contrário retorna o valor removido */
-    public int pop()
+    public void Pop()
     {
         if (empty())
         {
-            return -1;
+            Debug.Log("Você não pode remover nada da Pilha, pois ela está vazia.");
+            return;
         }
 
         Node p = top;
         int value = p.content;
         
-        //DESTROI CUBO DA PILHA
-        Destroy(p.getSquare());
         if(size() == 1)
         {
             top = null;
@@ -83,12 +72,13 @@ public class Stack : MonoBehaviour{
         {
             top = p.getNext();
         }
-        
+
+        //DESTROI CUBO DA PILHA
+        Destroy(p.getSquare());
+
         nElements--;
 
         p = null;
-
-        return value;
     }
 
 }
