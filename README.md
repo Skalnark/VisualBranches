@@ -6,8 +6,8 @@
 **TODO list**
 
  - Implementar os códigos de cada estrutura
-	 - Fila
-	 - Pilha
+	 - Fila ✔
+	 - Pilha ✔
 	 - Lista
 	 - Árvore
  - Criar as animações para cada tela
