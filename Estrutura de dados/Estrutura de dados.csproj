@@ -78,7 +78,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\input.cs" />
     <Compile Include="Assets\scripts\LDE.cs" />
     <Compile Include="Assets\scripts\MainMenuNavigator.cs" />
     <Compile Include="Assets\scripts\MakeAPush.cs" />

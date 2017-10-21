@@ -25,7 +25,7 @@ public class MoveCamera : MonoBehaviour {
             if(Input.GetAxis("Horizontal") < 0)
                 camera.transform.position += new Vector3(horizontal / 2, 0f, 0f);
         }
-        if(camera.transform.position.x < eventSystem.GetComponent<Queue>().size()-10)
+        if(camera.transform.position.x < eventSystem.GetComponent<Queue>().size()-13)
         {
             if(Input.GetAxis("Horizontal") > 0)
                 camera.transform.position += new Vector3(horizontal / 2, 0f, 0f);

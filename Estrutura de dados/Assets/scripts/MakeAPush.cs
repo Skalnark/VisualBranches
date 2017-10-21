@@ -17,9 +17,15 @@ public class MakeAPush : MonoBehaviour {
         textFieldObject.SetActive(false);
 
     }
+
+    public void HideInput()
+    {
+        textFieldObject.SetActive(false);
+    }
     
     public void ShowInput()
     {
         textFieldObject.SetActive(true);
+        input.text = null;
     }
 }

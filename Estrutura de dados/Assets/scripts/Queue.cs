@@ -9,6 +9,8 @@ public class Queue : MonoBehaviour{
 	private Node end;
 	public int nElements;
     public GameObject objeto;
+    public float speed;
+    public GameObject camera;
 
     public Queue() {
 		nElements = 0;
@@ -33,7 +35,9 @@ public class Queue : MonoBehaviour{
 	}
 
 	public void push (int value) {
+        float step = speed * Time.deltaTime;
         GameObject cube = Instantiate(objeto);
+        objeto.transform.position = new Vector3(0, 0, 0);
 		Node newNode = new Node();
 		newNode.setSquare(cube);
 		newNode.content =  value;
@@ -42,13 +46,20 @@ public class Queue : MonoBehaviour{
 	   if (empty()){   
 			begin = newNode;
             end = newNode;
-            newNode.getSquare().transform.position = new Vector3(-6.3f, 0,0);
+            newNode.getSquare().transform.position = new Vector3(-6, 0,0);
 	   }else
         {
+            newNode.getSquare().transform.position = new Vector3(-6, 1, 0);
 			end.setNext(newNode);
             end = newNode;
 			int pos = size();
-			newNode.getSquare().transform.position = new Vector3(-6.3f + pos, 0, 0); 
+            float target = -6 + pos;
+
+            StartCoroutine(MoveObject(newNode.getSquare().transform, target));
+            if (size() > 12)
+            {
+                StartCoroutine(MoveCameraWhenPush(camera.transform, camera.transform.position.x + 1));
+            }
 		}
 
         Debug.Log("end é igual a:" + end.content);
@@ -92,4 +103,40 @@ public class Queue : MonoBehaviour{
         p = null;
 	    nElements--;
 	}	
+
+    //função que não tem nada a ver com a fila
+    public IEnumerator MoveObject(Transform block, float target)
+    {
+        while (block.position.x != target)
+        {
+            if (block.position.x < target)
+            {
+                yield return new WaitForSecondsRealtime(0.0001f);
+                block.position += new Vector3(Time.deltaTime*size(), 0, 0);
+            }
+            else
+            {
+                block.position = new Vector3(target, 1, 0);
+            }
+        }
+        block.position += new Vector3(0, -1, 0);
+
+    }
+
+    public IEnumerator MoveCameraWhenPush(Transform camera, float target)
+    {
+        while(camera.position.x != target)
+        {
+            if(camera.position.x < target)
+            {
+                yield return new WaitForSeconds(0);
+                camera.position += new Vector3(Time.deltaTime, 0, 0);
+            }
+            else
+            {
+                camera.position = new Vector3(target, 1, -2);
+            }
+        }
+    }
+
 }
