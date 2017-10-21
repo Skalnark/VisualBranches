@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/QueueScene.unity
+- path: Assets/StackScene.unity
   isLoaded: 1
   isActive: 1
