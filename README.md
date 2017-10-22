@@ -12,7 +12,7 @@
 	 - Árvore
  - Criar as animações para cada tela
 	 - Fila ✔
-	 - Pilha
+	 - Pilha ✔
 	 - Lista
 	 - Árvore
  - Ajustar o design da interface

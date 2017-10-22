@@ -48,6 +48,28 @@ public class MakeAPush : MonoBehaviour {
         }
         input.text = null;
         textFieldObject.SetActive(false);
+    }
 
+    public void DebugPushStack()
+    {
+        try
+        {
+            inputObject.GetComponent<Stack>().Push(Random.Range(0, 100));
+        }
+        catch (System.Exception e)
+        {
+
+        }
+    }
+    public void DebugPushQueue()
+    {
+        try
+        {
+            inputObject.GetComponent<Queue>().push(Random.Range(0, 100));
+        }
+        catch (System.Exception e)
+        {
+
+        }
     }
 }
