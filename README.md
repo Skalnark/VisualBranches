@@ -11,7 +11,7 @@
 	 - Lista
 	 - Árvore
  - Criar as animações para cada tela
-	 - Fila
+	 - Fila ✔
 	 - Pilha
 	 - Lista
 	 - Árvore
