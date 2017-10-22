@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
@@ -18,3 +19,25 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
+=======
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estrutura de dados", "Estrutura de dados.csproj", "{18794A84-83F4-8A25-050E-D8C2EA9C0653}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18794A84-83F4-8A25-050E-D8C2EA9C0653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18794A84-83F4-8A25-050E-D8C2EA9C0653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18794A84-83F4-8A25-050E-D8C2EA9C0653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18794A84-83F4-8A25-050E-D8C2EA9C0653}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
+>>>>>>> 863b05d8aa3aa7cbaffb38674dbc11bba0fc6bba

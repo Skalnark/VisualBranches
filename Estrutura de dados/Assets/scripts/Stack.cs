@@ -7,6 +7,11 @@ public class Stack : MonoBehaviour{
     private Node top;
     public int nElements;
     public GameObject objetoBegin;
+<<<<<<< HEAD
+=======
+    public GameObject camera;
+    public float speed;
+>>>>>>> 863b05d8aa3aa7cbaffb38674dbc11bba0fc6bba
 
     public Stack()
     {
@@ -37,13 +42,29 @@ public class Stack : MonoBehaviour{
 
         if (empty())
         {
+<<<<<<< HEAD
             //ESSES VALORES ESTÃO ASSIM POR CAUSA DA ROTAÇÃO DA CAMERA
             newNode.getSquare().transform.position = new Vector3(-0.5f, -4.9f, 0);
+=======
+            newNode.getSquare().transform.position = new Vector3(0, -3, 0);
+>>>>>>> 863b05d8aa3aa7cbaffb38674dbc11bba0fc6bba
         }
         else
         {
             newNode.setNext(top);
+<<<<<<< HEAD
             newNode.getSquare().transform.position = new Vector3(-0.5f, -4.9f + ((float)size()/2), 0);
+=======
+            newNode.getSquare().transform.position = new Vector3(0, 6 + (float)size(), 0);
+            float target = -7 + (size()/ 2);
+            StartCoroutine(ConsertarPosicao(newNode.getSquare().transform, target));
+        }
+
+        if (size() > 17)
+        {
+            Debug.Log("leu aqui"); 
+            StartCoroutine(MoveCameraWhenPush(camera.transform, camera.transform.position.y + 1.2f));
+>>>>>>> 863b05d8aa3aa7cbaffb38674dbc11bba0fc6bba
         }
         
         top = newNode;
@@ -63,6 +84,10 @@ public class Stack : MonoBehaviour{
         }
 
         Node p = top;
+<<<<<<< HEAD
+=======
+        int value = p.content;
+>>>>>>> 863b05d8aa3aa7cbaffb38674dbc11bba0fc6bba
         
         if(size() == 1)
         {
@@ -72,12 +97,52 @@ public class Stack : MonoBehaviour{
             top = p.getNext();
         }
 
+<<<<<<< HEAD
         //DESTROI CUBO DA PILHA
+=======
+>>>>>>> 863b05d8aa3aa7cbaffb38674dbc11bba0fc6bba
         Destroy(p.getSquare());
 
         nElements--;
 
         p = null;
+<<<<<<< HEAD
     }
 
+=======
+
+        if (size() > 18 && camera.transform.position.y > 0)
+            camera.transform.position += new Vector3(0, -1, 0);
+}
+
+
+    IEnumerator ConsertarPosicao(Transform objeto, float target)
+    {
+        while(objeto.transform.position.y != target)
+        {
+            yield return new WaitForSecondsRealtime(3);
+            if (objeto.transform.position.y < target)
+            {
+                objeto.transform.position = new Vector3(0, target, 0);
+            }
+        }
+        yield return new WaitForSecondsRealtime(1);
+    }
+
+    IEnumerator MoveCameraWhenPush(Transform camera, float target)
+    {
+        while (camera.position.y != target)
+        {
+            if (camera.position.y > target)
+            {
+                yield return new WaitForSeconds(0);
+                camera.position += new Vector3(0, Time.deltaTime * size(), 0);
+            }
+            else
+            {
+                camera.position = new Vector3(0, target, -10);
+            }
+        }
+    }
+>>>>>>> 863b05d8aa3aa7cbaffb38674dbc11bba0fc6bba
 }

@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/ListScene.unity
+=======
+- path: Assets/StackScene.unity
+>>>>>>> 863b05d8aa3aa7cbaffb38674dbc11bba0fc6bba
   isLoaded: 1
   isActive: 1
