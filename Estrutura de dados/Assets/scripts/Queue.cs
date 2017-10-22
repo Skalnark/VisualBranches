@@ -48,13 +48,13 @@ public class Queue : MonoBehaviour
         }
         else
         {
-            newNode.getSquare().transform.position = new Vector3(-6, 1, 0);
+            newNode.getSquare().transform.position = new Vector3(-6, 2, 0);
             end.setNext(newNode);
             end = newNode;
             int pos = size();
             float target = -6 + pos;
 
-            StartCoroutine(MoveObject(newNode.getSquare().transform, target));
+            StartCoroutine(MoveObjectWhenPush(newNode.getSquare().transform, target));
             if (size() > 12)
             {
                 StartCoroutine(MoveCameraWhenPush(camera.transform, camera.transform.position.x + 1));
@@ -66,9 +66,9 @@ public class Queue : MonoBehaviour
 
     public void pull()
     {
-
+        //se clicar em remover aqui, ele lança exceção, mas foda-se
         GameObject objeto = begin.getSquare();
-
+        
         if (empty())
         {
             Debug.Log("Você não pode remover nada da fila, pois ela está vazia.");
@@ -76,9 +76,11 @@ public class Queue : MonoBehaviour
         }
 
         Node p = begin;
-
+        
         if (nElements == 1)
         {
+            objeto.AddComponent<Rigidbody>();
+            StartCoroutine(WaitNDestroy(objeto, 2));
             end = null;
             begin = null;
         }
@@ -88,6 +90,8 @@ public class Queue : MonoBehaviour
 
             Node aux = begin;
             int number = 0;
+
+            objeto.AddComponent<Rigidbody>();
 
             while (number < (nElements - 1))
             {
@@ -99,21 +103,24 @@ public class Queue : MonoBehaviour
             }
         }
 
-        Destroy(p.getSquare());
+        if (nElements > 1)
+            StartCoroutine(WaitNDestroy(p.getSquare(), 3));
 
         p = null;
         nElements--;
+         if (size() > 12 && camera.transform.position.x > 0)
+            camera.transform.position += new Vector3(-1, 0, 0);
     }
 
     //função que não tem nada a ver com a fila
-    public IEnumerator MoveObject(Transform block, float target)
+    public IEnumerator MoveObjectWhenPush(Transform block, float target)
     {
         while (block.position.x != target)
         {
             if (block.position.x < target)
             {
                 yield return new WaitForSecondsRealtime(0.0001f);
-                block.position += new Vector3(Time.deltaTime * size(), 0, 0);
+                block.position += new Vector3(Time.deltaTime * size()*2, 0, 0);
             }
             else
             {
@@ -124,6 +131,12 @@ public class Queue : MonoBehaviour
 
     }
 
+    public IEnumerator WaitNDestroy(GameObject objeto, float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        Destroy(objeto);
+    }
+
     public IEnumerator MoveCameraWhenPush(Transform camera, float target)
     {
         while (camera.position.x != target)
@@ -131,7 +144,7 @@ public class Queue : MonoBehaviour
             if (camera.position.x < target)
             {
                 yield return new WaitForSeconds(0);
-                camera.position += new Vector3(Time.deltaTime, 0, 0);
+                camera.position += new Vector3(Time.deltaTime*2, 0, 0);
             }
             else
             {
