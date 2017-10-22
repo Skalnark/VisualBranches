@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Node : MonoBehaviour {
 
 	public int content;
 	public GameObject square;
-	public Node next;
+	private Node next;
+    private Node previous;
+
+    public Node()
+    {
+        next = null;
+        previous = null;
+    }
 
 	public Node getNext(){
 		return this.next;
@@ -25,13 +29,13 @@ public class Node : MonoBehaviour {
 		this.square = nextSquare;
 	}
 
-    internal void setPrevious(Node newNode)
+    public Node getPrevious()
     {
-        throw new NotImplementedException();
+        return this.previous;
     }
 
-    internal Node getPrevious()
+    public void setPrevious(Node previousCube)
     {
-        throw new NotImplementedException();
+        this.previous = previousCube;
     }
 }

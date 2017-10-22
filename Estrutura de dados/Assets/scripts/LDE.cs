@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class LDE : MonoBehaviour
 {
-
-
+    public GameObject objetoBegin;
     private Node begin;
     private Node end;
-    private int nElements;
+    public int nElements;
 
-    /** Verifica se a Lista está vazia */
+    public LDE()
+    {
+        nElements = 0;
+    }
+
     public bool empty()
     {
         if (nElements == 0)
@@ -19,14 +20,11 @@ public class LDE : MonoBehaviour
             return false;
     }
 
-    /**Obtém o tamanho da Lista*/
     public int size()
     {
         return nElements;
     }
 
-    /** Obtém o i-ésimo elemento de uma lista
-	    Retorna o valor encontrado. */
     public int element(int pos)
     {
 
@@ -55,8 +53,6 @@ public class LDE : MonoBehaviour
         return aux.content;
     }
 
-    /**Retorna a posição de um elemento pesquisado.
-	    Retorna 0 caso não seja encontrado */
     public int whereIsAt(int content)
     {
         /*
@@ -98,26 +94,31 @@ public class LDE : MonoBehaviour
     }
 
     /** Insere nó em lista vazia ou no inicio da lista */
-    private bool pushFront(int value)
+    private void pushFront(int value)
     {
-        // Aloca memoria para novo no 
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject cube = Instantiate(objetoBegin);
         Node newNode = new Node();
         newNode.setSquare(cube);
         newNode.content = value;
+        cube.GetComponentInChildren<TextMesh>().text = "" + newNode.content;
+        newNode.setNext(null);
+        newNode.setPrevious(null);
 
-        if (empty())
+        if (nElements == 0)
         {
             //NÃO CRIAR LINHA
-            end = newNode; // Nova instrucao
+            end = newNode;
+            //Debug.Log("o end no Front eh: " + end.content);
             newNode.getSquare().transform.position = new Vector3(-6.3f, 0, 0);
-
         }
         else
         {
-
             newNode.setNext(begin);
+            // Debug.Log("o proximo do newNode eh : " + newNode.getNext().content);
+            //Debug.Log("o anterior do newNode eh : " + newNode.getPrevious().content);
             begin.setPrevious(newNode); // Nova instrucao	
+            //Debug.Log("o proximo do begin eh : " + begin.getNext().content);
+            //Debug.Log("o anterior do begin eh : " + begin.getPrevious().content);
 
             //MOVENDO A LISTA
             int number = size();
@@ -125,14 +126,16 @@ public class LDE : MonoBehaviour
 
             while (number > 0)
             {
-
                 Vector3 position = aux.getSquare().transform.position;
                 position.x = position.x + 1.5f; // 1 from the cube and 0,5 from the line
                 aux.getSquare().transform.position = position;
                 //LEMBRAR DE MOVER LINHA (1,5 TB)
+                Debug.Log("o aux eh o:" + aux.content);
+                //Debug.Log("e o anterior do aux eh o:" + aux.getPrevious().content);
                 aux = aux.getPrevious();
+                //Debug.Log("o aux AGR eh o:" + aux.content);
+                //Debug.Log("e o anterior do aux AGR eh o:" + aux.getPrevious().content);
                 number--;
-
             }
             aux = null;
 
@@ -142,40 +145,39 @@ public class LDE : MonoBehaviour
         }
 
         begin = newNode;
+        //Debug.Log("o begin eh no Front: " + begin.content);
         nElements++;
-        return true;
     }
 
-    private bool pushMiddle(int pos, int value)
+    private void pushMiddle(int pos, int value)
     {
-        int cont = 1;
-
-        // Aloca memoria para novo no
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject cube = Instantiate(objetoBegin);
         //CRIAR LINHA
         Node newNode = new Node();
         newNode.setSquare(cube);
         newNode.content = value;
+        cube.GetComponentInChildren<TextMesh>().text = "" + newNode.content;
+
+        if (pos > size())
+        {
+            Debug.Log("posição inválida");
+            return;
+        }
 
         // Localiza a pos. onde será inserido o novo nó
         Node p = begin;
-        while ((cont < pos - 1) && (p != null))
+        int cont = 1;
+        while (cont < (pos - 1))
         {
             p = p.getNext();
             cont++;
         }
-
-        if (p == null)
-        {  // pos. inválida 
-            return false;
-        }
-
+        
         int number = size();
         Node aux = end;
 
         while (number >= pos)
         {
-
             Vector3 position = aux.getSquare().transform.position;
             position.x = position.x + 1.5f; // 1 from the cube and 0,5 from the line
             aux.getSquare().transform.position = position;
@@ -191,64 +193,68 @@ public class LDE : MonoBehaviour
 
         // Insere novo elemento apos aux
         newNode.setPrevious(p); // Nova instrucao
+        //Debug.Log("o anterior do newNode no Middle eh: " + newNode.getPrevious().content);
         newNode.setNext(p.getNext());
+        //Debug.Log("o proximo do newNode no Middle eh: " + newNode.getNext().content);
 
         p.getNext().setPrevious(newNode); // Nova instrucao
+        //Debug.Log("o anterior do proximo do newNode no Middle eh: " + p.getNext().getPrevious().content);
 
         p.setNext(newNode);
+        //Debug.Log("o anterior do newNode no Middle aponta para o: " + p.getNext().content);
 
         p = null;
         nElements++;
-        return true;
     }
 
-    private bool pushBack(int value)
+    private void pushBack(int value)
     {
-        // Aloca memoria para novo no
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject cube = Instantiate(objetoBegin);
         //CRIAR LINHA
         Node newNode = new Node();
         newNode.setSquare(cube);
         newNode.content = value;
+        cube.GetComponentInChildren<TextMesh>().text = "" + newNode.content;
 
         //COLOCANDO O CUBO E A LINHA NO LUGAR
         //CUBO 0,5 UNIDADES DE DISTANCIA DEPOIS DA LINHA
         newNode.getSquare().transform.position = new Vector3(-6.3f + (1.5f * size()), 0, 0);
+        
         // Procura o final da lista 
-        Node p = end;
-
         newNode.setNext(null);
-        p.setNext(newNode);
+        newNode.setPrevious(end);
+        //Debug.Log("o anterior do newNode no Back eh: " + newNode.getPrevious().content);
+        end.setNext(newNode);
+       // Debug.Log("o proximo do anterior do newNode no Back eh: " + end.getNext().content);
+        end = newNode;
+        //Debug.Log("o end no Back eh: " + end.content);
 
-        newNode.setPrevious(end);  // Nova instrucao
-        end.setNext(newNode); // Nova instrucao
-        end = newNode;       // Nova instrucao
 
         this.nElements++;
-        return true;
     }
 
-    public bool push(int pos, int value)
+    public void push(int pos, int value)
     {
         if ((empty()) && (pos != 1))
         {
-            return false; /* lista vazia mas posicao inv*/
+            Debug.Log("Você não pode adicionar em uma posição não existente");
+            return; /* lista vazia mas posicao inv*/
         }
 
         /* inserção no início da lista (ou lista vazia)*/
         if (pos == 1)
         {
-            return pushFront(value);
+            pushFront(value);
         }
         /* inserção no fim da lista */
         else if (pos == nElements + 1)
         {
-            return pushBack(value);
+            pushBack(value);
         }
         /* inserção no meio da lista */
         else
         {
-            return pushMiddle(pos, value);
+            pushMiddle(pos, value);
         }
     }
 
@@ -356,10 +362,7 @@ public class LDE : MonoBehaviour
         return value;
 
     }
-
-    /**Remove um elemento de uma determinada posição
-	    Retorna o valor a ser removido. 
-	    -1 se a posição for inválida ou a lista estiver vazia*/
+    
     public int remove(int pos)
     {
         // Lista vazia 

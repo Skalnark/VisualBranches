@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4183130448128032}
-  - component: {fileID: 114171465167671270}
-  - component: {fileID: 114472856389619430}
   - component: {fileID: 114231455551820654}
   - component: {fileID: 114456638614508424}
   - component: {fileID: 114774454196563004}
+  - component: {fileID: 114017694442321352}
+  - component: {fileID: 114036627613414536}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -44,7 +44,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114171465167671270
+--- !u!114 &114017694442321352
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -52,9 +52,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1216112944231518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4ca08668d18447e930e1c0204b9067, type: 3}
+  m_Script: {fileID: 11500000, guid: e4e573873ffb7f840a4e09ee54e56896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputObject: {fileID: 1216112944231518}
+  textFieldAddObject: {fileID: 0}
+  textFieldRemoveObject: {fileID: 0}
+  valueInput: {fileID: 0}
+  posAddInput: {fileID: 0}
+  posRemoveInput: {fileID: 0}
+--- !u!114 &114036627613414536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1216112944231518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab350ac661613546a1b266ccfe8fdc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objetoBegin: {fileID: 1169371895798184, guid: 07d3a83618da2544aae9dfdb06118d86,
+    type: 2}
+  nElements: 0
 --- !u!114 &114231455551820654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84,17 +104,6 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
---- !u!114 &114472856389619430
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1216112944231518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e88b413d3108654db48e66447ffc531, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114774454196563004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,6 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1216112944231518}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
