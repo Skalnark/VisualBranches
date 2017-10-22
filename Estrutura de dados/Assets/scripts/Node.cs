@@ -1,12 +1,23 @@
-﻿using UnityEngine;
+﻿﻿using UnityEngine;
 
-public class Node : MonoBehaviour
-{
+public class Node : MonoBehaviour {
 
     public int content;
     public GameObject square;
     private Node next;
     private Node previous;
+    public GameObject line;
+
+
+    public GameObject getLine()
+    {
+        return this.line;
+    }
+
+    public void setLine(GameObject nextLine)
+    {
+        this.line = nextLine;
+    }
 
     public Node()
     {
@@ -14,23 +25,19 @@ public class Node : MonoBehaviour
         previous = null;
     }
 
-    public Node getNext()
-    {
+    public Node getNext(){
         return this.next;
     }
 
-    public void setNext(Node nextCube)
-    {
+    public void setNext(Node nextCube){
         this.next = nextCube;
     }
 
-    public GameObject getSquare()
-    {
+    public GameObject getSquare(){
         return this.square;
     }
 
-    public void setSquare(GameObject nextSquare)
-    {
+    public void setSquare(GameObject nextSquare){
         this.square = nextSquare;
     }
 
