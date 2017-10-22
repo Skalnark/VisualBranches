@@ -194,12 +194,6 @@ Prefab:
     - {fileID: 114472856389619430, guid: 56774c4db0be3bb41b1ad45c9720d9f2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 56774c4db0be3bb41b1ad45c9720d9f2, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &8547442 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114171465167671270, guid: 56774c4db0be3bb41b1ad45c9720d9f2,
-    type: 2}
-  m_PrefabInternal: {fileID: 8547441}
-  m_Script: {fileID: 11500000, guid: 2e4ca08668d18447e930e1c0204b9067, type: 3}
 --- !u!4 &131487151 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4580286499830412, guid: 845622bfce536d24ca59e2caaf49e714,
@@ -451,7 +445,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8547442}
+      - m_Target: {fileID: 0}
         m_MethodName: pull
         m_Mode: 1
         m_Arguments:
@@ -1531,6 +1525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 316097775}
+  camera: {fileID: 1680176575}
 --- !u!114 &1858203722 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114655229714982382, guid: e721f8da239e8984ca6b664123c57449,
