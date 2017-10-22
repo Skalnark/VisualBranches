@@ -8,7 +8,7 @@
  - Implementar os códigos de cada estrutura
 	 - Fila ✔
 	 - Pilha ✔
-	 - Lista
+	 - Lista ✔
 	 - Árvore
  - Criar as animações para cada tela
 	 - Fila ✔
