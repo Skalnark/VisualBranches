@@ -73,11 +73,21 @@ public class Stack : MonoBehaviour{
         }
 
         //DESTROI CUBO DA PILHA
-        Destroy(p.getSquare());
+        StartCoroutine(WaitNDestroy(2, p.getSquare()));
 
         nElements--;
 
         p = null;
     }
 
+    IEnumerator WaitNDestroy(float time, GameObject objeto)
+    {
+        if (nElements % 2 == 0)
+            objeto.transform.position += new Vector3(2, 1, -2);
+        else
+            objeto.transform.position += new Vector3(-2, 1, -2);
+        objeto.AddComponent<SpinRightRound>().start(nElements);
+        yield return new WaitForSecondsRealtime(time);
+        Destroy(objeto);
+    }
 }
