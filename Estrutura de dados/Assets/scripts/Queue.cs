@@ -1,8 +1,5 @@
 using UnityEngine;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 
 public class Queue : MonoBehaviour
 {
@@ -13,6 +10,7 @@ public class Queue : MonoBehaviour
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     public GameObject camera;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+    public bool showPopUp = false;
 
     public Queue()
     {
@@ -65,14 +63,13 @@ public class Queue : MonoBehaviour
 
     public void pull()
     {
-        //se clicar em remover aqui com ele null, ele lança exceção, mas foda-se
-        GameObject objeto = begin.getSquare();
 
         if (empty())
         {
-            Debug.Log("Você não pode remover nada da fila, pois ela está vazia.");
+            showPopUp = true;
             return;
         }
+        GameObject objeto = begin.getSquare();
 
         Node p = begin;
 
@@ -152,4 +149,31 @@ public class Queue : MonoBehaviour
         }
     }
 
+    public void OnGUI()
+    {
+        if (showPopUp)
+        {
+            GUI.Window(0, new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 75
+                , 300, 250), ShowGUI, "ERROR MESSAGE");
+            StartCoroutine(Wait());
+        }
+    }
+
+    public void ShowGUI(int windowID)
+    {
+        GUIStyle myStyle2 = new GUIStyle();
+        myStyle2.fontSize = 30;
+
+        myStyle2.normal.textColor = Color.white;
+        myStyle2.hover.textColor = Color.white;
+
+        GUI.Label(new Rect(70, 90, 200, 100), "     Error! " + "\n" +
+                                            "  Fila vazia", myStyle2);
+    }
+
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        showPopUp = false;
+    }
 }

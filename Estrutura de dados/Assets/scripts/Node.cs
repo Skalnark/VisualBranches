@@ -6,17 +6,28 @@ public class Node : MonoBehaviour {
     public GameObject square;
     private Node next;
     private Node previous;
-    public GameObject line;
+    public GameObject fLine;
+    public GameObject bLine;
 
 
-    public GameObject getLine()
+    public GameObject getFowardLine()
     {
-        return this.line;
+        return this.fLine;
     }
 
-    public void setLine(GameObject nextLine)
+    public void setFowardLine(GameObject nextLine)
     {
-        this.line = nextLine;
+        this.fLine = nextLine;
+    }
+
+    public GameObject getBackwardLine()
+    {
+        return this.bLine;
+    }
+
+    public void setBackwardLine(GameObject nextLine)
+    {
+        this.bLine = nextLine;
     }
 
     public Node()

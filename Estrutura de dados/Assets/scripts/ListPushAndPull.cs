@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class ListPushAndPull : MonoBehaviour
 {
-
     public GameObject inputObject;
     public GameObject textFieldAddObject;
     public GameObject textFieldRemoveObject;
@@ -29,7 +28,6 @@ public class ListPushAndPull : MonoBehaviour
 
     public void RemoveList()
     {
-        Debug.Log(posRemoveInput.text);
         try
         {
             inputObject.GetComponent<LDE>().remove(int.Parse(posRemoveInput.text));

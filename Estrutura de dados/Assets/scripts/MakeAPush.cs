@@ -11,7 +11,6 @@ public class MakeAPush : MonoBehaviour {
 
 	public void PushQueue()
     {
-        Debug.Log(input.text);
         try
         {
             inputObject.GetComponent<Queue>().push(int.Parse(input.text));
@@ -37,7 +36,6 @@ public class MakeAPush : MonoBehaviour {
 
     public void PushStack()
     {
-        Debug.Log(input.text);
         try
         {
             inputObject.GetComponent<Stack>().Push(int.Parse(input.text));

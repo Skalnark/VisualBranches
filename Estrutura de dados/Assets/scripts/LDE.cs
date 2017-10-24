@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class LDE : MonoBehaviour
 {
@@ -6,8 +7,19 @@ public class LDE : MonoBehaviour
     private Node begin;
     private Node end;
     public int nElements;
-    public Color foward;
-    public Color backward;
+    private Color foward;
+    private Color backward;
+    public Material shinyTexture;
+    public Material normalTexture;
+
+    //Abrir a tela do PopUp
+    private bool showPopUp = false;
+    //Colocar o label de lista vazia
+    private bool emptyPopUp = false;
+    //Colocar o label de posição invalida
+    private bool wrongPositionPopUp = false;
+    //Colocar o label de elemento invalido
+    private bool wrongElementPopUp = false;
 
     public LDE()
     {
@@ -30,21 +42,24 @@ public class LDE : MonoBehaviour
         return nElements;
     }
 
-    public int element(int pos)
+    public void element(int pos)
     {
-
-        Node aux = begin;
-        int cont = 1;
-
         if (empty())
         {
-            return -1; // Consulta falhou 
+            showPopUp = true;
+            emptyPopUp = true;
+            return; // Consulta falhou 
         }
 
         if ((pos < 1) || (pos > size()))
         {
-            return -1; // Posicao invalida 
+            showPopUp = true;
+            wrongPositionPopUp = true;
+            return; // Posição inválida 
         }
+
+        Node aux = begin;
+        int cont = 1;
 
         // Percorre a lista do 1o elemento até pos 
         while (cont < pos)
@@ -54,48 +69,47 @@ public class LDE : MonoBehaviour
             cont++;
         }
 
-        //FAZER UMA CAIXA DE MENSAGEM QUE MOSTRE O CONTEÚDO DO CUBINHO
-        return aux.content;
+        //Função para fazer o cubo mudar de cor por 5 segundos
+        StartCoroutine(Wait(aux.getSquare()));
+
+        return;
     }
 
-    public int whereIsAt(int content)
+    public void whereIsAt(int content)
     {
-        /*
-         * 
-         * FAZER O DEMONIO DO CUBO BRILHAR
-        Color clr = new Color(0, 0, 1, 1);
-        Renderer renderer = aux.getSquare().GetComponent<Renderer>();
-        Material newMaterial = new Material(Shader.Find("Specular"));
-        *
-        */
+        if (empty())
+        {
+            showPopUp = true;
+            emptyPopUp = true;
+            return;//lista vazia
+        }
+
         int cont = 1;
         Node aux;
 
-        /* Lista vazia */
-        if (empty())
-        {
-            return -1;
-        }
-
         /* Percorre a lista do inicio ao fim até encontrar o elemento*/
         aux = begin;
-        while (aux != null)
+        while (cont <= size())
         {
             /* Se encontrar o elemento, retorna sua posicao n;*/
             if (aux.content == content)
             {
-                return cont;
+                //Função para fazer o cubo mudar de cor por 5 segundos
+                StartCoroutine(Wait(aux.getSquare()));
+                return;
             }
 
             /* modifica "aux" para apontar para o proximo elemento da lista */
             aux = aux.getNext();
             cont++;
         }
-        /*mudar a cor do cubo
-		newMaterial.color = clr;
-		renderer.material = newMaterial;*/
 
-        return -1;
+        if(cont == size() + 1)
+        {
+            showPopUp = true;
+            wrongElementPopUp = true;
+            return;
+        }
     }
 
     /** Insere nó em lista vazia ou no inicio da lista */
@@ -131,15 +145,27 @@ public class LDE : MonoBehaviour
 
                 //Movendo linha --------------------------------------------
                 if (number > 1) {
-                    Vector3 positionLine = aux.getPrevious().getLine().transform.position;
-                    Vector3 positionEndLine = positionLine;
-                    positionLine.x = positionLine.x + 1.5f;
-                    positionEndLine.x += 2.0f;
+                    //LINHA FOWARD (VERDE)-------------------------------------------------------------------
+                    Vector3 positionBeginFowardLine = aux.getPrevious().getFowardLine().transform.position;
+                    Vector3 positionEndFowardLine = positionBeginFowardLine;
+                    positionBeginFowardLine.x = positionBeginFowardLine.x + 1.5f;
+                    positionEndFowardLine.x += 2.0f;
 
-                    LineRenderer lr = aux.getPrevious().getLine().GetComponent<LineRenderer>();
-                    lr.SetPosition(0, positionLine);
-                    lr.SetPosition(1, positionEndLine);
-                    aux.getPrevious().getLine().transform.position = positionLine;
+                    LineRenderer fowardLR = aux.getPrevious().getFowardLine().GetComponent<LineRenderer>();
+                    fowardLR.SetPosition(0, positionBeginFowardLine);
+                    fowardLR.SetPosition(1, positionEndFowardLine);
+                    aux.getPrevious().getFowardLine().transform.position = positionBeginFowardLine;
+
+                    //LINHA BACKWARD (VERMELHA)-------------------------------------------------------------------
+                    Vector3 positionBeginBackwardLine = aux.getPrevious().getBackwardLine().transform.position;
+                    Vector3 positionEndBackwardLine = positionBeginBackwardLine;
+                    positionBeginBackwardLine.x = positionBeginBackwardLine.x + 1.5f;
+                    positionEndBackwardLine.x += 2.0f;
+
+                    LineRenderer backwardLR = aux.getPrevious().getBackwardLine().GetComponent<LineRenderer>();
+                    backwardLR.SetPosition(0, positionBeginBackwardLine);
+                    backwardLR.SetPosition(1, positionEndBackwardLine);
+                    aux.getPrevious().getBackwardLine().transform.position = positionBeginBackwardLine;
                 }
 
                 //Indo para proximo nó --------------------------------------
@@ -150,26 +176,34 @@ public class LDE : MonoBehaviour
 
             //COLOCANDO O CUBO E A LINHA NO LUGAR
             newNode.getSquare().transform.position = new Vector3(-6.3f, 0, 0);
-            GameObject myLine = new GameObject();
-            Vector3 startLine = new Vector3(-5.8f, 0.25f, 0);
-            Vector3 endLine = new Vector3(-5.3f, 0.25f, 0);
-            DrawLine(startLine, endLine, foward, myLine);
-            newNode.setLine(myLine);
+
+            //Criando Foward Line
+            GameObject myFowardLine = new GameObject();
+            Vector3 startFLine = new Vector3(-5.8f, 0.25f, 0);
+            Vector3 endFLine = new Vector3(-5.3f, 0.25f, 0);
+            DrawLine(startFLine, endFLine, foward, myFowardLine);
+            newNode.setFowardLine(myFowardLine);
+
+            //Criando Backward Line
+            GameObject myBackwardLine = new GameObject();
+            Vector3 startBLine = new Vector3(-5.8f, -0.25f, 0);
+            Vector3 endBLine = new Vector3(-5.3f, -0.25f, 0);
+            DrawLine(startBLine, endBLine, backward, myBackwardLine);
+            newNode.setBackwardLine(myBackwardLine); 
 
         }
 
         begin = newNode;
         nElements++;
     }
-    /*
-     * Vector3 startLine = new Vector3(-5.8f + 1.5f * (size() - 1), 0.25f, 0);
-     * Vector3 endLine = new Vector3(-5.3f + 1.5f * (size() - 1), 0.25f, 0);
-     */
+
+    /** Insere nó no meio da lista*/
     private void pushMiddle(int pos, int value)
     {
         if (pos > size())
         {
-            Debug.Log("posição inválida");
+            showPopUp = true;
+            wrongPositionPopUp = true;
             return;
         }
 
@@ -200,15 +234,27 @@ public class LDE : MonoBehaviour
 
             if (number > pos)
             {
-                Vector3 positionLine = aux.getPrevious().getLine().transform.position;
-                Vector3 positionEndLine = positionLine;
-                positionLine.x = positionLine.x + 1.5f;
-                positionEndLine.x += 2.0f;
+                //LINHA FOWARD (VERDE)-------------------------------------------------------------------
+                Vector3 positionBeginFowardLine = aux.getPrevious().getFowardLine().transform.position;
+                Vector3 positionEndFowardLine = positionBeginFowardLine;
+                positionBeginFowardLine.x = positionBeginFowardLine.x + 1.5f;
+                positionEndFowardLine.x += 2.0f;
 
-                LineRenderer lr = aux.getPrevious().getLine().GetComponent<LineRenderer>();
-                lr.SetPosition(0, positionLine);
-                lr.SetPosition(1, positionEndLine);
-                aux.getPrevious().getLine().transform.position = positionLine;
+                LineRenderer fowardLR = aux.getPrevious().getFowardLine().GetComponent<LineRenderer>();
+                fowardLR.SetPosition(0, positionBeginFowardLine);
+                fowardLR.SetPosition(1, positionEndFowardLine);
+                aux.getPrevious().getFowardLine().transform.position = positionBeginFowardLine;
+
+                //LINHA BACKWARD (VERMELHA)-------------------------------------------------------------------
+                Vector3 positionBeginBackwardLine = aux.getPrevious().getBackwardLine().transform.position;
+                Vector3 positionEndBackwardLine = positionBeginBackwardLine;
+                positionBeginBackwardLine.x = positionBeginBackwardLine.x + 1.5f;
+                positionEndBackwardLine.x += 2.0f;
+
+                LineRenderer backwardLR = aux.getPrevious().getBackwardLine().GetComponent<LineRenderer>();
+                backwardLR.SetPosition(0, positionBeginBackwardLine);
+                backwardLR.SetPosition(1, positionEndBackwardLine);
+                aux.getPrevious().getBackwardLine().transform.position = positionBeginBackwardLine;
             }
             aux = aux.getPrevious();
             number--;
@@ -218,11 +264,20 @@ public class LDE : MonoBehaviour
 
         //COLOCANDO O CUBO E A LINHA NO LUGAR
         newNode.getSquare().transform.position = new Vector3(-6.3f + (1.5f * (pos - 1)), 0, 0);
-        GameObject myLine = new GameObject();
-        Vector3 startLine = new Vector3(-5.8f + 1.5f * (pos - 1), 0.25f, 0);
-        Vector3 endLine = new Vector3(-5.3f + 1.5f * (pos - 1), 0.25f, 0);
-        DrawLine(startLine, endLine, foward, myLine);
-        newNode.setLine(myLine);
+
+        //Criando Foward Line
+        GameObject myFowardLine = new GameObject();
+        Vector3 startFLine = new Vector3(-5.8f + 1.5f * (pos - 1), 0.25f, 0);
+        Vector3 endFLine = new Vector3(-5.3f + 1.5f * (pos - 1), 0.25f, 0);
+        DrawLine(startFLine, endFLine, foward, myFowardLine);
+        newNode.setFowardLine(myFowardLine);
+
+        //Criando Backward Line
+        GameObject myBackwardLine = new GameObject();
+        Vector3 startBLine = new Vector3(-5.8f + 1.5f * (pos - 1), -0.25f, 0);
+        Vector3 endBLine = new Vector3(-5.3f + 1.5f * (pos - 1), -0.25f, 0);
+        DrawLine(startBLine, endBLine, backward, myBackwardLine);
+        newNode.setBackwardLine(myBackwardLine);
 
         // Insere novo elemento apos aux
         newNode.setPrevious(p);
@@ -234,6 +289,7 @@ public class LDE : MonoBehaviour
         nElements++;
     }
 
+    /** Insere nó no fim da lista*/
     private void pushBack(int value)
     {
         GameObject cube = Instantiate(objetoBegin);
@@ -246,11 +302,20 @@ public class LDE : MonoBehaviour
         //COLOCANDO O CUBO E A LINHA NO LUGAR
         //CUBO 0,5 UNIDADES DE DISTANCIA DEPOIS DA LINHA
         newNode.getSquare().transform.position = new Vector3(-6.3f + (1.5f * size()), 0, 0);
-        GameObject myLine = new GameObject();
-        Vector3 startLine = new Vector3(-5.8f + 1.5f * (size() - 1), 0.25f, 0);
-        Vector3 endLine = new Vector3(-5.3f + 1.5f * (size() - 1), 0.25f, 0);
-        DrawLine(startLine, endLine, foward, myLine);
-        end.setLine(myLine);
+
+        //Criando Foward Line
+        GameObject myFowardLine = new GameObject();
+        Vector3 startFLine = new Vector3(-5.8f + 1.5f * (size() - 1), 0.25f, 0);
+        Vector3 endFLine = new Vector3(-5.3f + 1.5f * (size() - 1), 0.25f, 0);
+        DrawLine(startFLine, endFLine, foward, myFowardLine);
+        end.setFowardLine(myFowardLine);
+
+        //Criando Backward Line
+        GameObject myBackwardLine = new GameObject();
+        Vector3 startBLine = new Vector3(-5.8f + 1.5f * (size() - 1), -0.25f, 0);
+        Vector3 endBLine = new Vector3(-5.3f + 1.5f * (size() - 1), -0.25f, 0);
+        DrawLine(startBLine, endBLine, backward, myBackwardLine);
+        end.setBackwardLine(myBackwardLine);
 
         // Procura o final da lista
         newNode.setPrevious(end);
@@ -262,9 +327,10 @@ public class LDE : MonoBehaviour
 
     public void push(int pos, int value)
     {
-        if ((empty()) && (pos != 1))
+        if ((nElements == 0) && (pos != 1))
         {
-            Debug.Log("Você não pode adicionar em uma posição não existente");
+            showPopUp = true;
+            wrongPositionPopUp = true;
             return; /* lista vazia, mas posicao invalida*/
         }
 
@@ -304,7 +370,6 @@ public class LDE : MonoBehaviour
     private void removeFrontList()
     {
         Node p = begin;
-        // Retira o 1o elemento da lista (p)
         
         begin = p.getNext();
         begin.setPrevious(null);  // Nova instrucao
@@ -314,17 +379,45 @@ public class LDE : MonoBehaviour
 
         while (number < (size() - 1))
         {
-            Vector3 position = aux.getSquare().transform.position;
-            position.x = position.x - 1.5f; // 1 from the cube and 0,5 from the line
-            //LEMBRAR DE MOVER LINHA (1,5 TB)
-            aux.getSquare().transform.position = position;
+            //Movendo cubos -------------------------------------------
+            Vector3 positionSquare = aux.getSquare().transform.position;
+            positionSquare.x = positionSquare.x - 1.5f; // 1 from the cube and 0,5 from the line
+            aux.getSquare().transform.position = positionSquare;
+
+            //Movendo linha --------------------------------------------
+            if (number < (size() - 2))
+            {
+                //LINHA FOWARD (VERDE)-------------------------------------------------------------------
+                Vector3 positionBeginFowardLine = aux.getFowardLine().transform.position;
+                Vector3 positionEndFowardLine = positionBeginFowardLine;
+                positionBeginFowardLine.x = positionBeginFowardLine.x - 1.5f;
+                positionEndFowardLine.x -= 1.0f;
+
+                LineRenderer fowardLR = aux.getFowardLine().GetComponent<LineRenderer>();
+                fowardLR.SetPosition(0, positionBeginFowardLine);
+                fowardLR.SetPosition(1, positionEndFowardLine);
+                aux.getFowardLine().transform.position = positionBeginFowardLine;
+
+                //LINHA BACKWARD (VERMELHA)-------------------------------------------------------------------
+                Vector3 positionBeginBackwardLine = aux.getBackwardLine().transform.position;
+                Vector3 positionEndBackwardLine = positionBeginBackwardLine;
+                positionBeginBackwardLine.x = positionBeginBackwardLine.x - 1.5f;
+                positionEndBackwardLine.x -= 1.0f;
+
+                LineRenderer backwardLR = aux.getBackwardLine().GetComponent<LineRenderer>();
+                backwardLR.SetPosition(0, positionBeginBackwardLine);
+                backwardLR.SetPosition(1, positionEndBackwardLine);
+                aux.getBackwardLine().transform.position = positionBeginBackwardLine;
+            }
+
             aux = aux.getNext();
             number++;
         }
         aux = null;
 
         Destroy(p.getSquare());
-        //DESTROY DA LINHA 
+        Destroy(p.getFowardLine());
+        Destroy(p.getBackwardLine());
 
         nElements--;
         p = null;
@@ -335,7 +428,8 @@ public class LDE : MonoBehaviour
     {
         if (pos > size())
         {
-            Debug.Log("posição inválida");
+            showPopUp = true;
+            wrongPositionPopUp = true;
             return;
         }
 
@@ -357,17 +451,44 @@ public class LDE : MonoBehaviour
 
         while (number < size())
         {
-            Vector3 position = aux.getSquare().transform.position;
-            position.x = position.x - 1.5f; // 1 from the cube and 0,5 from the line
-            //LEMBRAR DE MOVER LINHA (1,5 TB)
-            aux.getSquare().transform.position = position;
+            //Movendo cubos -------------------------------------------
+            Vector3 positionSquare = aux.getSquare().transform.position;
+            positionSquare.x = positionSquare.x - 1.5f; // 1.0 from the cube and 0.5 from the line
+            aux.getSquare().transform.position = positionSquare;
+
+            //Movendo linha --------------------------------------------
+            if (number < (size() - 1))
+            {
+                //LINHA FOWARD (VERDE)-------------------------------------------------------------------
+                Vector3 positionBeginFowardLine = aux.getFowardLine().transform.position;
+                Vector3 positionEndFowardLine = positionBeginFowardLine;
+                positionBeginFowardLine.x = positionBeginFowardLine.x - 1.5f;
+                positionEndFowardLine.x -= 1.0f;
+
+                LineRenderer fowardLR = aux.getFowardLine().GetComponent<LineRenderer>();
+                fowardLR.SetPosition(0, positionBeginFowardLine);
+                fowardLR.SetPosition(1, positionEndFowardLine);
+                aux.getFowardLine().transform.position = positionBeginFowardLine;
+
+                //LINHA BACKWARD (VERMELHA)-------------------------------------------------------------------
+                Vector3 positionBeginBackwardLine = aux.getBackwardLine().transform.position;
+                Vector3 positionEndBackwardLine = positionBeginBackwardLine;
+                positionBeginBackwardLine.x = positionBeginBackwardLine.x - 1.5f;
+                positionEndBackwardLine.x -= 1.0f;
+
+                LineRenderer backwardLR = aux.getBackwardLine().GetComponent<LineRenderer>();
+                backwardLR.SetPosition(0, positionBeginBackwardLine);
+                backwardLR.SetPosition(1, positionEndBackwardLine);
+                aux.getBackwardLine().transform.position = positionBeginBackwardLine;
+            }
             aux = aux.getNext();
             number++;
         }
         aux = null;
 
         Destroy(p.getSquare());
-        //DESTROY LINHA DO SQUARE
+        Destroy(p.getFowardLine());
+        Destroy(p.getBackwardLine());
 
         nElements--;
         p = null;
@@ -377,11 +498,13 @@ public class LDE : MonoBehaviour
     private void removeBack()
     {
         Node p = end;
+        Node aux = end.getPrevious();
         end = p.getPrevious();
         end.setNext(null);
 
         Destroy(p.getSquare());
-        //DESTROY LINHA
+        Destroy(aux.getFowardLine());
+        Destroy(aux.getBackwardLine());
 
         nElements--;
         p = null;
@@ -392,7 +515,8 @@ public class LDE : MonoBehaviour
         // Lista vazia 
         if (empty())
         {
-            Debug.Log("Você não pode remover nada de uma Lista vazia.");
+            showPopUp = true;
+            emptyPopUp = true;
             return;
         }
 
@@ -427,9 +551,92 @@ public class LDE : MonoBehaviour
         myLine.AddComponent<LineRenderer>();
         LineRenderer lr = myLine.GetComponent<LineRenderer>();
         lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
-        lr.SetColors(color, color);
-        lr.SetWidth(start: 0.1f, end: 0.1f);
+        lr.startColor = color;
+        lr.endColor = color;
+        lr.startWidth = 0.1f;
+        lr.endWidth = 0.1f;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
+    }
+
+    public IEnumerator Wait(GameObject square)
+    {
+        // FAZER O DEMONIO DO CUBO BRILHAR
+        MeshRenderer renderer = square.GetComponent<MeshRenderer>();
+        Material newMaterial = shinyTexture;
+        renderer.material = newMaterial;
+
+        yield return new WaitForSecondsRealtime(5);
+
+        //FAZER O DEMONIO DO CUBO VOLTAR AO NORMAL
+        Material newMaterial2 = normalTexture;
+        renderer.material = newMaterial2;
+    }
+
+    public void OnGUI()
+    {
+        if (showPopUp)
+        {
+            if (emptyPopUp)
+            {
+                GUI.Window(0, new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 75
+                            , 300, 250), ShowEmptyGUI, "ERROR MESSAGE");
+            }
+
+            if (wrongPositionPopUp)
+            {
+                GUI.Window(0, new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 75
+                            , 300, 250), ShowPositionGUI, "ERROR MESSAGE");
+            }
+
+            if (wrongElementPopUp)
+            {
+                GUI.Window(0, new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 75
+                            , 300, 250), ShowElementGUI, "ERROR MESSAGE");
+            }
+            StartCoroutine(Wait());
+        }
+    }
+
+    public void ShowEmptyGUI(int windowID)
+    {
+        GUIStyle myStyle2 = new GUIStyle();
+        myStyle2.fontSize = 30;
+
+        myStyle2.normal.textColor = Color.white;
+        myStyle2.hover.textColor = Color.white;
+        GUI.Label(new Rect(70, 90, 200, 100), "    Error! " + "\n" +
+                                            "  Lista vazia", myStyle2);
+    }
+
+    public void ShowPositionGUI(int windowID)
+    {
+        GUIStyle myStyle2 = new GUIStyle();
+        myStyle2.fontSize = 22;
+
+        myStyle2.normal.textColor = Color.white;
+        myStyle2.hover.textColor = Color.white;
+        GUI.Label(new Rect(70, 90, 200, 100), "        Error! " + "\n" +
+           "Posição inválida", myStyle2);
+    }
+
+    public void ShowElementGUI(int windowID)
+    {
+        GUIStyle myStyle2 = new GUIStyle();
+        myStyle2.fontSize = 20;
+
+        myStyle2.normal.textColor = Color.white;
+        myStyle2.hover.textColor = Color.white;
+        GUI.Label(new Rect(70, 90, 200, 100), "         Error! " + "\n" +
+           "Valor não detectado", myStyle2);
+    }
+
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        wrongPositionPopUp = false;
+        wrongElementPopUp = false;
+        emptyPopUp = false;
+        showPopUp = false;
     }
 }

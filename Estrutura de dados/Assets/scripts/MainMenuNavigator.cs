@@ -21,10 +21,16 @@ public class MainMenuNavigator : MonoBehaviour {
         SceneManager.LoadScene("StackScene");//carrega a cena da pilha
     }
 
+    public void GoToAbout()
+    {
+        SceneManager.LoadSceneAsync("AboutScene"); //carrega a cena do sobre
+    }
+
     public void GoToMain()
     {
         SceneManager.LoadSceneAsync(0); //vai para a main scene
     }
+
     
     public void QuitGame()
     {

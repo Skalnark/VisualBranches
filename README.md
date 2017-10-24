@@ -15,6 +15,6 @@
 	 - Pilha ✔
 	 - Lista
 	 - Árvore
- - Ajustar o design da interface
+ - Ajustar o design da interface ✔
  - Adicionar melhorias nos gráficos
 

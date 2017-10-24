@@ -7,6 +7,7 @@ public class Stack : MonoBehaviour{
     private Node top;
     public int nElements;
     public GameObject objetoBegin;
+    public bool showPopUp = false;
 
     public Stack()
     {
@@ -58,7 +59,7 @@ public class Stack : MonoBehaviour{
     {
         if (empty())
         {
-            Debug.Log("Você não pode remover nada da Pilha, pois ela está vazia.");
+            showPopUp = true;
             return;
         }
 
@@ -89,5 +90,33 @@ public class Stack : MonoBehaviour{
         objeto.AddComponent<SpinRightRound>().start(nElements);
         yield return new WaitForSecondsRealtime(time);
         Destroy(objeto);
+    }
+
+    public void OnGUI()
+    {
+        if (showPopUp)
+        {
+            GUI.Window(0, new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 75
+                , 300, 250), ShowGUI, "ERROR MESSAGE");
+            StartCoroutine(Wait());
+        }
+    }
+
+    public void ShowGUI(int windowID)
+    {
+        GUIStyle myStyle2 = new GUIStyle();
+        myStyle2.fontSize = 30;
+
+        myStyle2.normal.textColor = Color.white;
+        myStyle2.hover.textColor = Color.white;
+
+        GUI.Label(new Rect(70, 90, 200, 100), "     Error! " + "\n" +
+                                            " Pilha vazia", myStyle2);
+    }
+
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        showPopUp = false;
     }
 }
