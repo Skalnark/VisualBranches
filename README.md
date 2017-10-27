@@ -18,3 +18,4 @@
  - Ajustar o design da interface ✔
  - Adicionar melhorias nos gráficos
 
+[Download do executável do projeto](https://goo.gl/hhAa3r)
