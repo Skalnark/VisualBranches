@@ -203,9 +203,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1991214621065384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 082800d2702d0f045b2d6217a595381a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ad3a1bd6aed8f54b9818547ea889a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nElements: 0
+  objetoBegin: {fileID: 0}
+  showPopUp: 0
 --- !u!114 &114851856552214814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,4 +222,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: 1
   square: {fileID: 1991214621065384}
-  next: {fileID: 0}
+  fLine: {fileID: 0}
+  bLine: {fileID: 0}

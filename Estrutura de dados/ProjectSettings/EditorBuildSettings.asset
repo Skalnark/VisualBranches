@@ -20,3 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/AboutScene.unity
     guid: 281d601c92401e54783012d624f79b04
+  - enabled: 1
+    path: Assets/TreeScene.unity
+    guid: 122481e4a9ab4df4eb6c68c428f14ceb

@@ -21,6 +21,11 @@ public class MainMenuNavigator : MonoBehaviour {
         SceneManager.LoadScene("StackScene");//carrega a cena da pilha
     }
 
+    public void GoToTree()
+    {
+        SceneManager.LoadScene("TreeScene");//carrega a cena da arvore
+    }
+
     public void GoToAbout()
     {
         SceneManager.LoadSceneAsync("AboutScene"); //carrega a cena do sobre
