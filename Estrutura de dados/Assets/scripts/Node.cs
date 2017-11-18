@@ -9,27 +9,6 @@ public class Node : MonoBehaviour {
     public GameObject fLine;
     public GameObject bLine;
 
-
-    public GameObject getFowardLine()
-    {
-        return this.fLine;
-    }
-
-    public void setFowardLine(GameObject nextLine)
-    {
-        this.fLine = nextLine;
-    }
-
-    public GameObject getBackwardLine()
-    {
-        return this.bLine;
-    }
-
-    public void setBackwardLine(GameObject nextLine)
-    {
-        this.bLine = nextLine;
-    }
-
     public Node()
     {
         next = null;
@@ -60,5 +39,25 @@ public class Node : MonoBehaviour {
     public void setPrevious(Node previousCube)
     {
         this.previous = previousCube;
+    }
+
+    public GameObject getFowardLine()
+    {
+        return this.fLine;
+    }
+
+    public void setFowardLine(GameObject nextLine)
+    {
+        this.fLine = nextLine;
+    }
+
+    public GameObject getBackwardLine()
+    {
+        return this.bLine;
+    }
+
+    public void setBackwardLine(GameObject nextLine)
+    {
+        this.bLine = nextLine;
     }
 }
