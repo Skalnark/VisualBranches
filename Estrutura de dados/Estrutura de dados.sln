@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estrutura de dados", "Estrutura de dados.csproj", "{18794A84-83F4-8A25-050E-D8C2EA9C0653}"
 EndProject
 Global
