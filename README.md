@@ -9,12 +9,12 @@
 	 - Fila ✔
 	 - Pilha ✔
 	 - Lista ✔
-	 - Árvore
+	 - Árvore ✔
  - Criar as animações para cada tela
 	 - Fila ✔
 	 - Pilha ✔
-	 - Lista
-	 - Árvore
+	 - Lista ✔
+	 - Árvore ✔
  - Ajustar o design da interface ✔
  - Adicionar melhorias nos gráficos
 
