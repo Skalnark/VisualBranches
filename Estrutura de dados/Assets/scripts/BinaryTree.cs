@@ -7,10 +7,11 @@ public class BinaryTree : MonoBehaviour{
     public GameObject objetoBegin;
     private Node root;
     private Color foward;
-    public Material shinyTexture;
-    public Material normalTexture;
+    public Material normalMaterial;
     private int depth;
     private float distance;
+    public Material redMaterial;
+    public Material greenMaterial;
 
     //Abrir a tela do PopUp
     private bool showPopUp = false;
@@ -18,6 +19,7 @@ public class BinaryTree : MonoBehaviour{
     private bool emptyPopUp = false;
     //Colocar o label de elemento invalido
     private bool wrongElementPopUp = false;
+    
 
     public BinaryTree()
     {
@@ -117,7 +119,7 @@ public class BinaryTree : MonoBehaviour{
     public Node search(Node T, int value)
     {
         Node aux;
-
+        StartCoroutine(TrazOObjetoQuePiscaVermelho(T.getSquare()));
         //stop conditions
         if (ReferenceEquals(null, T))
         {
@@ -128,9 +130,6 @@ public class BinaryTree : MonoBehaviour{
         {
             return T;
         }
-
-        //Função para passar de nó em nó, até achar o certo
-        StartCoroutine(Looking(T.getSquare()));
 
         //Recursive case
         if (value < T.content)
@@ -165,39 +164,35 @@ public class BinaryTree : MonoBehaviour{
         }
 
         //Função para mostrar q achou o nó
-        StartCoroutine(Wait(searchNode.getSquare()));
+        StartCoroutine(TrazOObjetoQuePiscaVerde(searchNode.getSquare()));
     }
 
     //Função para brilhar nó em nó até o chegar no certo
-    public IEnumerator Looking(GameObject square)
+    public IEnumerator TrazOObjetoQuePiscaVermelho(GameObject square)
     {
         // FAZER O DEMONIO DO CUBO BRILHAR
         MeshRenderer renderer = square.GetComponent<MeshRenderer>();
-        Material newMaterial = shinyTexture;
-        renderer.material = newMaterial;
+        renderer.material = redMaterial;
 
-        yield return new WaitForSecondsRealtime(1);
 
-        //FAZER O DEMONIO DO CUBO VOLTAR AO NORMAL
-        Material newMaterial2 = normalTexture;
-        renderer.material = newMaterial2;
+        yield return new WaitForSecondsRealtime(2);
+
+        // FAZER O DEMONIO DO CUBO 
+        renderer.material = normalMaterial;
     }
-
-    //Função para brilhar o nó certo
-    public IEnumerator Wait(GameObject square)
+    public IEnumerator TrazOObjetoQuePiscaVerde(GameObject square)
     {
         // FAZER O DEMONIO DO CUBO BRILHAR
         MeshRenderer renderer = square.GetComponent<MeshRenderer>();
-        Material newMaterial = shinyTexture;
-        renderer.material = newMaterial;
+        renderer.material = greenMaterial;
+
 
         yield return new WaitForSecondsRealtime(5);
 
-        //FAZER O DEMONIO DO CUBO VOLTAR AO NORMAL
-        Material newMaterial2 = normalTexture;
-        renderer.material = newMaterial2;
+        // FAZER O DEMONIO DO CUBO 
+        renderer.material = normalMaterial;
     }
-    
+
     //Função para os PopUp
     public void OnGUI()
     {
@@ -274,5 +269,4 @@ public class BinaryTree : MonoBehaviour{
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
     }
-
 }
