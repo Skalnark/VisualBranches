@@ -5,7 +5,9 @@ public class TreeInsert : MonoBehaviour {
 
     public GameObject inputObject;
     public GameObject textFieldAddObject;
+    public GameObject textFieldSearchObject;
     public InputField valueInput;
+    public InputField searchInput;
 
     public void BTreeInsert()
     {
@@ -31,5 +33,31 @@ public class TreeInsert : MonoBehaviour {
     public void ShowAddInput()
     {
         textFieldAddObject.SetActive(true);
+    }
+
+    public void BTreeSearch()
+    {
+        try
+        {
+            inputObject.GetComponent<BinaryTree>().searchRoot(int.Parse(searchInput.text));
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
+        }
+        searchInput.text = "";
+        textFieldSearchObject.SetActive(false);
+
+    }
+
+    public void HideSearchInput()
+    {
+        textFieldSearchObject.SetActive(false);
+        searchInput.text = "";
+    }
+
+    public void ShowSearchInput()
+    {
+        textFieldSearchObject.SetActive(true);
     }
 }
