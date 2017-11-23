@@ -16,6 +16,16 @@
 	 - Lista ✔
 	 - Árvore ✔
  - Ajustar o design da interface ✔
+ 
+ 
+ 
+ 
+ ###Melhorias a serem adicionadas nas férias
  - Adicionar melhorias nos gráficos
+ - Adicionar informações sobre as estruturas
+ - Adicionar som
+ - Melhorar as texturas (colocar textura de colchão na pilha!!)
+ - Melhorar os ícones
+ - Portar para android (e talvez web)
 
-[Download do executável do projeto](https://drive.google.com/file/d/1lO9g7O7xwaRvdcnqFHsxC6AW-CouMdsX/view?usp=sharing)
+[Download do executável do projeto](https://drive.google.com/file/d/1lO9g7O7xwaRvdcnqFHsxC6AW-CouMdsX/view?usp=sharing) (desatualizado)
