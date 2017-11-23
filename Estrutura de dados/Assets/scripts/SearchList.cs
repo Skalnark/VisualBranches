@@ -25,6 +25,20 @@ public class SearchList : MonoBehaviour {
         textFieldElementObject.SetActive(false);
     }
 
+    public void SeqListElement()
+    {
+        try
+        {
+            inputObject.GetComponent<SeqList>().SeqPosition(int.Parse(valueElementInput.text));
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
+        }
+        valueElementInput.text = "";
+        textFieldElementObject.SetActive(false);
+    }
+
     public void Element()
     {
         try
@@ -39,6 +53,19 @@ public class SearchList : MonoBehaviour {
         textFieldPositionObject.SetActive(false);
     }
 
+    public void SeqListPosition()
+    {
+        try
+        {
+            inputObject.GetComponent<SeqList>().SeqElement(int.Parse(valuePositionInput.text));
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
+        }
+        valuePositionInput.text = "";
+        textFieldPositionObject.SetActive(false);
+    }
 
     public void ShowSearchButtons()
     {

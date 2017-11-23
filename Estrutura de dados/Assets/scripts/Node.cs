@@ -60,4 +60,8 @@ public class Node : MonoBehaviour {
     {
         this.bLine = nextLine;
     }
+    public Node getNode()
+    {
+        return this;
+    }
 }

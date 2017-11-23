@@ -84,10 +84,14 @@
     <Compile Include="Assets\scripts\MainMenuNavigator.cs" />
     <Compile Include="Assets\scripts\MakeAPush.cs" />
     <Compile Include="Assets\scripts\MoveCamera.cs" />
+    <Compile Include="Assets\scripts\MoveCameraLDE.cs" />
+    <Compile Include="Assets\scripts\MoveCameraQueue.cs" />
+    <Compile Include="Assets\scripts\MoveCameraSeqList.cs" />
     <Compile Include="Assets\scripts\Node.cs" />
     <Compile Include="Assets\scripts\OnClickFunctionsForTree.cs" />
     <Compile Include="Assets\scripts\Queue.cs" />
     <Compile Include="Assets\scripts\SearchList.cs" />
+    <Compile Include="Assets\scripts\SeqList.cs" />
     <Compile Include="Assets\scripts\SpinRightRound.cs" />
     <Compile Include="Assets\scripts\Stack.cs" />
     <Compile Include="Assets\scripts\TreeInsert.cs" />

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/mainScene.unity
     guid: 77b26befd877040f097087fba42f17e9
   - enabled: 1
-    path: Assets/ListScene.unity
+    path: Assets/ChainedListScene.unity
     guid: 458ed94dec406b744808730816008ae0
   - enabled: 1
     path: Assets/StackScene.unity
@@ -23,3 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TreeScene.unity
     guid: 122481e4a9ab4df4eb6c68c428f14ceb
+  - enabled: 1
+    path: Assets/ChooseListScene.unity
+    guid: 1bbcd84bbfbf82b459176a56c13e0847
+  - enabled: 1
+    path: Assets/SeqListScene.unity
+    guid: 40f8fb6ffe8778943872c996e121253d

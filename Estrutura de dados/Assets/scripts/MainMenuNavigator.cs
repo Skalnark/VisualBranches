@@ -5,10 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuNavigator : MonoBehaviour {
 
-    //Esse script sai da MainScene para a ListScene
-    public void GoToList()
+    public void GoToChooseList()
     {
-        SceneManager.LoadScene("ListScene");//carrega a cena da lista
+        SceneManager.LoadScene("ChooseListScene"); //carrega cena de escolher qual o tipo de lista
+    }
+
+    public void GoToChainedList()
+    {
+        SceneManager.LoadScene("ChainedListScene"); //carrega cena de lista encadeada
+    }
+
+    public void GoToSeqList()
+    {
+        SceneManager.LoadScene("SeqListScene"); //carrega cena de lista encadeada
     }
 
     public void GoToQueue()
@@ -35,7 +44,6 @@ public class MainMenuNavigator : MonoBehaviour {
     {
         SceneManager.LoadSceneAsync(0); //vai para a main scene
     }
-
     
     public void QuitGame()
     {
